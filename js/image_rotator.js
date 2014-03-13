@@ -63,8 +63,8 @@
     g_this = this;
 
     removeElement = function(e) {
-      e.target.remove();
       g_this.rotate();
+      e.target.remove();
     }
 
     window.setTimeout(function(){

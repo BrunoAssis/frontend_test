@@ -3,6 +3,8 @@
 <head>
 	<title>Frontend Coding Test | Text Search</title>
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
+	<script src="../js/dom_extend.js"></script>
+	<script src="../js/text_search.js"></script>
 </head>
 <body>
 <div id="headwrap">
@@ -27,13 +29,12 @@
 	<hr/>
 
 	<h2>Search</h2>
-	<form>
-		<input type="text" id="search_input" value="llama" />
-		<input type="submit" value="Search" />
+	<form id="search-form">
+		<input type="text" id="search_input" placeholder="Search a word..." />
 	</form>
 
 	<h3>Results</h3>
-	Found 0 occurances of the word "llama" in the below text.
+	<p id="results">Found <span id="number-results">0</span> occurances of the word "<span id="search-word">llama</span>" in the below text.</span>
 
 	<hr/>
 
