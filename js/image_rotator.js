@@ -48,6 +48,10 @@
 
     this.e.appendChild(imageContainer);
 
+    if (whichImage == 'back' && this.backImage != '') {
+      this.backImage.remove();
+    }
+
     return imageContainer;
   }
 
@@ -64,8 +68,8 @@
     }
 
     window.setTimeout(function(){
-            g_this.frontImage.addEventListener('animationend', removeElement, false);
-           g_this.frontImage.addEventListener('oAnimationEnd', removeElement, false);
+      g_this.frontImage.addEventListener('animationend', removeElement, false);
+      g_this.frontImage.addEventListener('oAnimationEnd', removeElement, false);
       g_this.frontImage.addEventListener('webkitAnimationEnd', removeElement, false);
       g_this.frontImage.addClass('fade-out');
     }, this.delaySeconds * 1000);
