@@ -4,10 +4,11 @@
     this.delaySeconds = delaySeconds;
 
     this.imageData = this.getImageData();
-    this.index = 0;
 
-    this.frontImage = '';
-    this.backImage = '';
+    this.currentVisible = 0;
+    this.currentVisibleElement = '';
+    this.currentBackgroundElement = '';
+    this.images = this.loadImages();
   };
 
   ImageRotator.prototype.getImageData = function() {
@@ -27,51 +28,65 @@
     return imageData;
   };
 
-  ImageRotator.prototype.loadImage = function(whichImage) {
-    if (this.index >= this.imageData.length) {
-      this.index = 0;
+  ImageRotator.prototype.loadImages = function() {
+    var images = [];
+    for (i=0; i<this.imageData.length; i++) {
+      var imageData = this.imageData[i];
+
+      var imageContainer = document.createElement('div'); 
+      imageContainer.className = 'image-container';
+      
+      var imagePicture = document.createElement('img');
+      imagePicture.src = imageData.url;
+      imageContainer.appendChild(imagePicture);
+
+      var imageOverlay = document.createElement('div');
+      imageOverlay.className = 'overlay';
+      imageOverlay.innerHTML = '<h4>' + imageData.name + '</h4><p>' + imageData.description + '</p>';
+      imageContainer.appendChild(imageOverlay);
+
+      imageContainer.hide();
+
+      images.push(imageContainer);
+      this.e.appendChild(imageContainer);
     }
+    return images;
+  }
 
-    var imageData = this.imageData[this.index];
+  ImageRotator.prototype.resetImage = function(event) {
+    event.target.hide();
+    event.target.style['z-index'] = 0;
+    event.target.removeEventListener('animationend');
+    event.target.removeEventListener('oAnimationEnd');
+    event.target.removeEventListener('webkitAnimationEnd');
+    event.target.removeClass('fade-out');
+    g_this.rotate();
+  }
 
-    var imageContainer = document.createElement('div'); 
-    imageContainer.className = 'image-container' + ' ' + whichImage;   
-    
-    var imagePicture = document.createElement('img');
-    imagePicture.src = imageData.url;
-    imageContainer.appendChild(imagePicture);
-
-    var imageOverlay = document.createElement('div');
-    imageOverlay.className = 'overlay';
-    imageOverlay.innerHTML = '<h4>' + imageData.name + '</h4><p>' + imageData.description + '</p>';
-    imageContainer.appendChild(imageOverlay);
-
-    this.e.appendChild(imageContainer);
-
-    if (whichImage == 'back' && this.backImage != '') {
-      this.backImage.remove();
-    }
-
-    return imageContainer;
+  ImageRotator.prototype.hideCurrentImage = function() {
+    this.currentVisibleElement.addEventListener('animationend', this.resetImage, false);
+    this.currentVisibleElement.addEventListener('oAnimationEnd', this.resetImage, false);
+    this.currentVisibleElement.addEventListener('webkitAnimationEnd', this.resetImage, false);
+    this.currentVisibleElement.addClass('fade-out');
   }
 
   ImageRotator.prototype.rotate = function() {
-    this.frontImage = this.loadImage('front');
-    this.index++;
-    this.backImage = this.loadImage('back');
-
-    g_this = this;
-
-    removeElement = function(e) {
-      g_this.rotate();
-      e.target.remove();
+    this.currentVisibleElement = this.images[this.currentVisible];
+    
+    this.currentVisible += 1;
+    if (this.currentVisible > this.imageData.length-1) {
+      this.currentVisible = 0;
     }
 
-    window.setTimeout(function(){
-      g_this.frontImage.addEventListener('animationend', removeElement, false);
-      g_this.frontImage.addEventListener('oAnimationEnd', removeElement, false);
-      g_this.frontImage.addEventListener('webkitAnimationEnd', removeElement, false);
-      g_this.frontImage.addClass('fade-out');
+    this.currentBackgroundElement = this.images[this.currentVisible];
+
+    this.currentVisibleElement.style['z-index'] = 1;
+    this.currentVisibleElement.show();
+    this.currentBackgroundElement.show();
+
+    g_this = this;
+    window.setTimeout(function() {
+      g_this.hideCurrentImage();
     }, this.delaySeconds * 1000);
   }
 

@@ -16,10 +16,18 @@ Element.prototype.removeClass = function(klass) {
     var index = this.className.split(' ').indexOf(klass);
     var classes = this.className.split(' ');
     classes.splice(index, 1);
-    e.className = classes.join(' ');
+    this.className = classes.join(' ');
   }
 };
 
 Element.prototype.remove = function() {
-    this.parentElement.removeChild(this);
+  this.parentElement.removeChild(this);
+}
+
+Element.prototype.show = function() {
+  this.style['display'] = 'block';
+}
+
+Element.prototype.hide = function() {
+  this.style['display'] = 'none';
 }
