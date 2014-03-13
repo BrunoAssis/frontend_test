@@ -5,13 +5,77 @@
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
 	<style type="text/css">
 		#rotator {
+			position: relative;
+		}
+
+		#rotator .image-list {
+			display: none;
+		}
+
+		#rotator .image-container {
+			position: absolute;
+		}
+
+		#rotator .front {
+			z-index: 1;
+		}
+
+		#rotator .back {
+			z-index: 0;
+		}
+
+		#rotator .image-container .overlay {
+			margin-top: -267px;
+			position: absolute;
 			width: 450px;
-			height: 300px;
-			border: 1px solid black;
-			background: #aaa;
-			text-align: center;
+			height: 266px;		
+		}
+
+		#rotator .image-container .overlay h4 {
+			margin-top: -10px;
+			padding: 10px 0 0 10px;
+			color: #f00;
+			font-size: 1.5em;
+			text-shadow: 2px 2px #900;
+		}
+
+		#rotator .image-container .overlay p {
+			margin-top: 150px;
+			padding: 20px;
+			color: white;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		.fade-out {
+				   		animation:fade-out 2s;
+					 -o-animation:fade-out 2s; /* Opera */
+				 -moz-animation:fade-out 2s; /* Firefox */
+			-webkit-animation:fade-out 2s; /* Safari and Chrome */
+		}
+
+		@keyframes fade-out {
+		   0% {opacity:1;}
+		   100% {opacity:0;}
+		}
+
+		@-moz-keyframes fade-out { /* Firefox */
+		   0% {opacity:1;}
+		   100% {opacity:0;}
+		}
+
+		@-webkit-keyframes fade-out { /* Safari and Chrome */
+		   0% {opacity:1;}
+		   100% {opacity:0;}
+		}
+
+		@-o-keyframes fade-out { /* Opera */
+		   0% {opacity:1;}
+		   100% {opacity:0;}
 		}
 	</style>
+
+	<script src="../js/dom_extend.js"></script>
+	<script src="../js/image_rotator.js"></script>
 </head>
 <body>
 	<div id="headwrap">
@@ -34,7 +98,7 @@
 
 	<h4>Katarina</h4>
 	<p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p>
-	<img src="../img/kat_1.jpg" /><br/>
+	<img class="test" src="../img/kat_1.jpg" /><br/>
 
 	<h4>Red Card Katarina</h4>
 	<p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p>
@@ -51,7 +115,30 @@
 	<hr/>
 
 	<div id="rotator">
-		Rotator Here
+		<ul class="image-list">
+			<li>
+				<h4>Katarina</h4>
+				<p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p>
+				<img src="../img/kat_1.jpg" /><br/>
+			</li>
+
+			<li>
+				<h4>Red Card Katarina</h4>
+				<p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p>
+				<img src="../img/kat_2.jpg" /><br/>
+			</li>
+
+			<li>
+				<h4>Kitty Cat Katarina</h4>
+				<p>Applicake topping halvah lemon drops wypas cotton candy.</p>
+				<img src="../img/kat_3.jpg" /><br/>
+			</li>
+
+			<li>
+				<h4>High Command Katarina</h4>
+				<p>Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops.</p>
+				<img src="../img/kat_4.jpg" /><br/>
+			</li>
 	</div>
 </div>
 
