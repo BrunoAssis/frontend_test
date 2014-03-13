@@ -9,10 +9,10 @@
   Tabify.prototype.changeTab = function(event) {
     var tab_id = event.target.getAttribute('data-tab-id');
     for (i=0; i<this.tabButtons.length; i++) {
-      this.tabButtons[i].removeClass('activeTabHeader');
+      this.tabButtons[i].removeClass('active-tab-header');
       this.tabs[i].hide();
     }
-    this.tabButtons[tab_id].addClass('activeTabHeader');
+    this.tabButtons[tab_id].addClass('active-tab-header');
     this.tabs[tab_id].show();
   }
 
@@ -27,7 +27,7 @@
 
   Tabify.prototype.loadHeaders = function() {
     var tabButtons = this.tabHeaders.querySelectorAll('h3[data-tab-id]');
-    tabButtons[0].addClass('activeTabHeader');
+    tabButtons[0].addClass('active-tab-header');
 
     g_this = this;
     for (i=0; i<tabButtons.length; i++) {
