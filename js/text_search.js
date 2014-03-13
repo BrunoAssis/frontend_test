@@ -9,6 +9,7 @@
     g_this = this;
     this.searchInput.addEventListener('change', function(event){ g_this.search(event) });
     this.searchInput.addEventListener('keyup', function(event){ g_this.search(event) });
+    this.searchForm.addEventListener('submit', function(event){ event.preventDefault() });
 
     this.numberResultsLabel = document.querySelector('#number-results');
     this.searchWordLabel = document.querySelector('#search-word');
@@ -16,9 +17,10 @@
 
   SearchEngine.prototype.search = function(event) {
     var search = event.target.value;
-    
+    search = search.sanitize();
+
     if (search) {
-      searchRegex = new RegExp('(' + search + ')', 'gi');
+      searchRegex = new RegExp(search, 'gi');
       count = 0;
       do {
         matches = searchRegex.exec(this.searchText);
@@ -29,7 +31,7 @@
       } while (matches && matches.index != searchRegex.lastIndex);
 
       this.numberResultsLabel.innerHTML = count;
-      this.searchWordLabel.innerHTML = search;
+      this.searchWordLabel.innerHTML = event.target.value;
     }
   };
 

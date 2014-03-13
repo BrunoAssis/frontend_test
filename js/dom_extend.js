@@ -31,3 +31,7 @@ Element.prototype.show = function() {
 Element.prototype.hide = function() {
   this.style['display'] = 'none';
 }
+
+String.prototype.sanitize = function() {
+  return this.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&');
+}
