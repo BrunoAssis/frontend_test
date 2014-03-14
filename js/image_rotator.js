@@ -56,9 +56,9 @@
   ImageRotator.prototype.resetImage = function(event) {
     event.target.hide();
     event.target.style['z-index'] = 0;
-    event.target.removeEventListener('animationend');
-    event.target.removeEventListener('oAnimationEnd');
-    event.target.removeEventListener('webkitAnimationEnd');
+    event.target.removeEventListener('animationend', this.resetImage);
+    event.target.removeEventListener('oAnimationEnd', this.resetImage);
+    event.target.removeEventListener('webkitAnimationEnd', this.resetImage);
     event.target.removeClass('fade-out');
     g_this.rotate();
   }
