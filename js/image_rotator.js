@@ -55,7 +55,7 @@
 
   ImageRotator.prototype.resetImage = function(event) {
     event.target.hide();
-    event.target.style['z-index'] = 0;
+    event.target.style.zIndex = 0;
     event.target.removeEventListener('animationend', this.resetImage);
     event.target.removeEventListener('oAnimationEnd', this.resetImage);
     event.target.removeEventListener('webkitAnimationEnd', this.resetImage);
@@ -80,7 +80,7 @@
 
     this.currentBackgroundElement = this.images[this.currentVisible];
 
-    this.currentVisibleElement.style['z-index'] = 1;
+    this.currentVisibleElement.style.zIndex = 1;
     this.currentVisibleElement.show();
     this.currentBackgroundElement.show();
 
