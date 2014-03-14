@@ -1,5 +1,11 @@
 # Frontend Coding Test
 
+## Tested on
+- Chrome (latest) (OS X/Windows)
+- Safari (latest) (OS X/iOS)
+- Firefox (latest) (OS X/Windows)
+- Internet Explorer 11 (Windows)
+
 Contained within this repo is a series of problems, each problem is an HTML file that contains the explaination of the problem as well as a partial solution.
 
 Please complete the HTML/CSS/JavaScript code in the problem file in order to solve it and send the completed code back to us to review. Feel free to put comments in the HTML file to explain your solution. Also **PLEASE DO NOT USE ANY THIRD PARTY LIBRARIES** to complete these.
